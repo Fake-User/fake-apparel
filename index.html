@@ -5,6 +5,7 @@
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <title>FAKE APPAREL</title>
     <style>
+        @font-face {font-family: night-devision; src: url("./static/fonts/Fontspring-DEMO-podiumsharp-6.13.otf");}
         *{
             padding: 0;
             margin: 0;
@@ -12,9 +13,10 @@
         .header{
             width: 100vw;
             height: 12vh;
+            padding: 0 3vh;
             position: fixed;
             display: grid;
-            grid-template-columns: 12vh 1fr auto 1fr 12vh;
+            grid-template-columns: auto 1fr auto 1fr auto;
             background-color: #000;
             filter: drop-shadow(0 0 2vh #000);
             border-style: solid;
@@ -25,43 +27,53 @@
             color: #fff;
             align-content: center;
             text-align: center;
+            font-family: night-devision;
+            font-size: 3vh;
         }
-        .apparel{
+        #apparel{
             background-color: #222;
             width: 100vw;
             box-sizing: border-box;
             min-height: 100vh;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-evenly;
-            padding: 16vh 4vh 4vh 4vh;
-            gap: 4vh;
+            justify-content: center;
+            padding: 14vh 4vh 4vh 4vh;
+            gap: 2vh;
         }
             .apparel-item{
-                height: 44vh;
+                height: 25vh;
                 aspect-ratio: auto;
                 border-radius: 2vh;
-                filter: drop-shadow(0 0 2vh #000);
+                filter: drop-shadow(0 0 1vh #000);
+                background-color: #000;
             }
 
     </style>
 </head>
 <body>
     <div class="header">
-        <div>LOGO</div>
+        <div>...</div>
         <div></div>
-        <div>FAKE APPAREL</div>
+        <div>FAKE&nbspAPPAREL</div>
         <div></div>
-        <div>SLIDER</div>
+        <div>...</div>
     </div>
 
-    <div class="apparel">
-        <img class="apparel-item" src="./static/apparel/Neo4ic - Elden Ring.webp">
-        <img class="apparel-item" src="./static/apparel/Neo4ic - Elden Ring.webp">
-        <img class="apparel-item" src="./static/apparel/Neo4ic - Elden Ring.webp">
-        <img class="apparel-item" src="./static/apparel/Neo4ic - Elden Ring.webp">
-        <img class="apparel-item" src="./static/apparel/Neo4ic - Elden Ring.webp">
-    </div>
+    <div id="apparel"></div>
+
+    <script>
+        fetch("apparel.json")
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            let output = "";
+            data.forEach(function(item){
+                output += `<img class="apparel-item" src="./static/apparel/${item.img}">`
+            });
+            document.getElementById("apparel").innerHTML = output;
+        })
+    </script>
 
 </body>
 </html>
